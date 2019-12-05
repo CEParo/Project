@@ -31,7 +31,7 @@ int main(){
          }
     else
          {
-          blinks == it->getValue();
+          blinks = it->getValue();
          }
    it = form.getElement("cmd");  //get radio command
    if (it == form.getElements().end() || it->getValue()==""){
@@ -53,19 +53,19 @@ int main(){
         << ( cmd=="off" ? "checked":"") << "/> Off ";
    cout << "<input type=\"radio\" name=\"cmd\" value=\"blink\""
 	<< ( cmd=="blink" ? "checked":"") << "/> Blink ";
-   cout << "<div>Number of Blinks: <input type=\" text\" name=\"numbers\" value=\""
+   cout << "<div>Number of Blinks: <input type=\" text\" name=\"numbers\" input=\""
 	<< blinks <<"\"> times      ";
-   cout << "<input type=\"submit\" value=\"Set LED\" />";
+//   cout << "<input type=\"submit\" value=\"Set LED\" />";
    cout << "</div></form>";
 
-int blink = stoi(blinks);  // converting value of blinks from a string to an int
+int blinknum = stoi(blinks);  // converting value of blinks from a string to an int
  
    // process the form data to change the LED state
    if (cmd=="on") writeGPIO("value", "1");              // turn on
    else if (cmd=="off") writeGPIO("value", "0");        // turn off
    else if (cmd=="blink")
 	{
-	 for(int i = 0; i < blink; i++)         //blink loop
+	 for(int i = 0; i < blinknum; i++)         //blink loop
 		{
 		 writeGPIO("value", "1");
 		 sleep(1);
